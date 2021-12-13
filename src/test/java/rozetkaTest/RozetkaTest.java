@@ -1,5 +1,8 @@
 package rozetkaTest;
 
+import manager.JacksonReader;
+import manager.PageFactoryManager;
+import model.ProductModel;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -14,14 +17,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import static org.openqa.selenium.By.xpath;
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class RozetkaTest {
     private WebDriver driver;
-    private String categoriesMenu = "//ul[@class = \"menu-categories menu-categories_type_main\"]//a[contains(@class , \"menu-categories\")]";
-    private String bucketLogo = "//app-buy-button";
+    private PageFactoryManager pageFactoryManager;
+    private ProductModel productModel = JacksonReader.readDataFromXml("src/main/resources/testData.xml");
 
     @BeforeTest
     public void profileSetUp() {
@@ -31,27 +32,20 @@ public class RozetkaTest {
     @BeforeMethod
     public void testSetUp() {
         driver = new ChromeDriver();
+        pageFactoryManager = new PageFactoryManager(driver);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.get("https://rozetka.com.ua/");
     }
 
     @Test
-    public void checkThatUrlContainsSearchWord() {
-        driver.findElements(xpath(this.categoriesMenu)).get(0).click();
-        driver.findElement(xpath("//section[@class = \"portal-section\"]//a[@href = \"https://rozetka.com.ua/notebooks/c80004/\"]//img")).click();
-        driver.findElements(xpath(this.bucketLogo)).stream().findFirst().get().click();
-        driver.findElement(xpath("//img[@alt = \"Rozetka Logo\"]")).click();
-        driver.findElements(xpath(this.categoriesMenu)).get(1).click();
-        driver.findElement(xpath("//a[@href = \"https://rozetka.com.ua/mobile-phones/c80003/producer=apple/\"]")).click();
-        driver.findElements(xpath(this.bucketLogo)).stream().findFirst().get().click();
-        driver.findElement(xpath("//img[@alt = \"Rozetka Logo\"]")).click();
-        driver.findElements(xpath(this.categoriesMenu)).get(15).click();
-        driver.findElement(xpath("//a[@href = \"https://bt.rozetka.com.ua/seyfy/c163969/\"]")).click();
-        driver.findElements(xpath(this.bucketLogo)).stream().findFirst().get().click();
-        driver.findElement(xpath("//button[contains (@class ,\"header__button ng-star-inserted \")]")).click();
-        assertEquals(driver.findElements(xpath("//li[contains (@class ,\"cart-list__item ng-star-inserted\")]")).size(), 3, "Wrong product count");
-        assertTrue(Integer.parseInt(driver.findElement(xpath("//div[@class = \"cart-receipt__sum-price\"]/span[1]")).getText()) < 100000);
+    public void checkProductPriceInBucket() {
+        pageFactoryManager.geTHomePage().findItemByName(productModel.getItem());
+        pageFactoryManager.getComputersAndLaptops().inputItemModel(productModel.getModel());
+        pageFactoryManager.getComputersAndLaptops().getFirstProduct();
+        pageFactoryManager.getCatalogPage().clickOnFindProduct();
+        pageFactoryManager.getProductPage().clickOnByButton();
+        assertTrue(pageFactoryManager.getBucketPage().getItemPrice() < productModel.getPrice());
 
     }
 
