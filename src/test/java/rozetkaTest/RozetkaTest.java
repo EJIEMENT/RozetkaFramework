@@ -2,61 +2,59 @@ package rozetkaTest;
 
 import manager.JacksonReader;
 import manager.PageFactoryManager;
+import manager.WebDriverSingleton;
 import model.ProductModel;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
+import java.util.List;
 
 import static org.testng.Assert.assertTrue;
 
 public class RozetkaTest {
-    private WebDriver driver;
     private PageFactoryManager pageFactoryManager;
-    private ProductModel productModel = JacksonReader.readDataFromXml("src/main/resources/testData.xml");
 
-    @BeforeTest
-    public void profileSetUp() {
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+    @DataProvider(name = "xmlData", parallel = true)
+    public static Object[][] dataProviderMethod1() {
+        List<ProductModel> users = JacksonReader.readListDataFromXml("src/main/resources/testData.xml");
+        Object[][] objects = new Object[users.size()][3];
+        for (int i = 0; i < users.size(); i++) {
+            objects[i][0] = users.get(i).getItem();
+            objects[i][1] = users.get(i).getModel();
+            objects[i][2] = users.get(i).getPrice();
+        }
+        return objects;
     }
 
     @BeforeMethod
     public void testSetUp() {
-        driver = new ChromeDriver();
-        pageFactoryManager = new PageFactoryManager(driver);
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.get("https://rozetka.com.ua/");
+               pageFactoryManager = new PageFactoryManager();
+        WebDriverSingleton.getInstance().get("https://rozetka.com.ua/");
     }
 
-    @Test
-    public void checkProductPriceInBucket() {
-        pageFactoryManager.geTHomePage().findItemByName(productModel.getItem());
-        pageFactoryManager.getComputersAndLaptops().inputItemModel(productModel.getModel());
-        pageFactoryManager.getComputersAndLaptops().getFirstProduct();
+    @Test(dataProvider = "xmlData")
+    public void checkProductPriceInBucket(String item, String model, Integer price) {
+        pageFactoryManager.geTHomePage().findItemByName(item);
+        pageFactoryManager.getComputersAndLaptops().inputItemModel(model);
+        pageFactoryManager.getComputersAndLaptops().selectFirstProduct(model);
         pageFactoryManager.getCatalogPage().clickOnFindProduct();
         pageFactoryManager.getProductPage().clickOnByButton();
-        assertTrue(pageFactoryManager.getBucketPage().getItemPrice() < productModel.getPrice());
+        assertTrue(pageFactoryManager.getBucketPage().getItemPrice() < price);
 
     }
 
     @AfterMethod
     public void tearDown() {
-        File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        File scrFile = ((TakesScreenshot) WebDriverSingleton.getInstance()).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(scrFile, new File("src/main/resources/screenshot.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        driver.quit();
+        WebDriverSingleton.dropDriver();
     }
 }

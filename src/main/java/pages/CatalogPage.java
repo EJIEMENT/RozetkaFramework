@@ -1,6 +1,6 @@
 package pages;
 
-import org.openqa.selenium.WebDriver;
+import decorator.Button;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -14,7 +14,7 @@ public class CatalogPage extends BasePage {
         laptopCatalog.stream().findFirst().get().click();
     }
 
-    public CatalogPage(WebDriver webDriver) {
-        super(webDriver);
+    public CatalogPage() {
+        super();
     }
 }

@@ -1,8 +1,19 @@
 <?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>
+<Products>
+    <ProductModel>
+        <item>Ноутбуки</item>>
+        <model>Apple</model>>
+        <price>1000000</price>>
+    </ProductModel>
+    <ProductModel>
+        <item>Велосипед</item>>
+        <model>Ardis</model>>
+        <price>750000</price>>
+    </ProductModel>
+    <ProductModel>
+        <item>Холодильник</item>>
+        <model>Bosch</model>>
+        <price>999999</price>>
+    </ProductModel>
 
-<ProductModel>
-    <item>Ноутбуки</item>>
-    <model>Apple</model>>
-    <price>1000000</price>>
-</ProductModel>
-
+</Products>

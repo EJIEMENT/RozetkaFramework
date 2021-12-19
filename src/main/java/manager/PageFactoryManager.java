@@ -1,32 +1,29 @@
 package manager;
 
-import org.openqa.selenium.WebDriver;
 import pages.*;
 
 public class PageFactoryManager {
-    WebDriver driver;
 
-    public PageFactoryManager(WebDriver driver) {
-        this.driver = driver;
+    public PageFactoryManager() {
     }
 
     public HomePage geTHomePage() {
-        return new HomePage(driver);
+        return new HomePage();
     }
 
     public ProductPage getProductPage() {
-        return new ProductPage(driver);
+        return new ProductPage();
     }
 
     public CatalogPage getCatalogPage() {
-        return new CatalogPage(driver);
+        return new CatalogPage();
     }
 
     public BucketPage getBucketPage() {
-        return new BucketPage(driver);
+        return new BucketPage();
     }
 
     public ComputersAndLaptops getComputersAndLaptops() {
-        return new ComputersAndLaptops(driver);
+        return new ComputersAndLaptops();
     }
 }

@@ -1,16 +1,15 @@
 package pages;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import decorator.Element;
 import org.openqa.selenium.support.FindBy;
 
 public class BucketPage extends BasePage {
     @FindBy(xpath = "//div[@class = \"cart-receipt__sum-price\"]/span[1]")
-    private WebElement itemPrice;
+    private Element itemPrice;
 
 
-    public BucketPage(WebDriver webDriver) {
-        super(webDriver);
+    public BucketPage() {
+        super();
     }
 
     public Integer getItemPrice() {

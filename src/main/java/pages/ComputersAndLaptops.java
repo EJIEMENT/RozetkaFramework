@@ -1,26 +1,28 @@
 package pages;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import decorator.Button;
+import decorator.InputBox;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
 
 public class ComputersAndLaptops extends BasePage {
     @FindBy(xpath = "//div[@data-filter-name = 'producer']//div[@class = \"sidebar-search\"]/input")
-    private WebElement checkBoxFilter;
-    @FindBy(xpath = "//div[@data-filter-name = 'producer']//ul[@class = \"checkbox-filter\"]//label[contains (@for, \"Apple\")]")
-    private List<WebElement> modelCheckBox;
+    private InputBox checkBoxFilter;
+    @FindBy(xpath = "//button[@class = \"sidebar-search__clear ng-star-inserted\" ]")
+    private Button buttonOut;
 
-    public ComputersAndLaptops(WebDriver webDriver) {
-        super(webDriver);
+
+    public ComputersAndLaptops() {
+        super();
     }
 
     public void inputItemModel(String itemModel) {
+        waitForPageLoadComplete(20);
         checkBoxFilter.sendKeys(itemModel);
     }
 
-    public void getFirstProduct() {
-        modelCheckBox.stream().findFirst().get().click();
+    public void selectFirstProduct(String itemModel) {
+        webDriver.findElement(By.xpath(String.format("//div[@data-filter-name = 'producer']//ul[@class = \"checkbox-filter\"]//label[contains (@for, \"%s\")]", itemModel))).click();
     }
+
 }
