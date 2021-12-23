@@ -1,28 +1,28 @@
 <?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>
 <Products>
     <ProductModel>
-        <item>Ноутбуки</item>>
+        <item>Notebook</item>>
         <model>Apple</model>>
         <price>1000000</price>>
     </ProductModel>
     <ProductModel>
-        <item>Велосипед</item>>
-        <model>Ardis</model>>
+        <item>Bicycle</item>>
+        <model>USPCC</model>>
         <price>750000</price>>
     </ProductModel>
     <ProductModel>
-        <item>Холодильник</item>>
-        <model>Bosch</model>>
+        <item>Phone</item>>
+        <model>ASUS</model>>
         <price>999999</price>>
     </ProductModel>
     <ProductModel>
-        <item>Клавіатура</item>>
+        <item>Keyboard</item>>
         <model>A4Tech</model>>
         <price>5000</price>>
     </ProductModel>
     <ProductModel>
-        <item>Холодильник</item>>
-        <model>Samsung</model>>
+        <item>Watch</item>>
+        <model>STR</model>>
         <price>979320</price>>
     </ProductModel>
 
