@@ -20,12 +20,12 @@ public class WebDriverSingleton {
     }
 
     private static WebDriver createChromeDriver() {
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+        System.setProperty(ConfigManager.getInstance().getDriverName(), ConfigManager.getInstance().getDriverPath());
         ChromeOptions options = new ChromeOptions();
         options.addArguments("-incognito","--disable-popup-blocking");
         webDriverThreadLocal.set(new ChromeDriver(options));
         webDriverThreadLocal.get().manage().window().maximize();
-        webDriverThreadLocal.get().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        webDriverThreadLocal.get().manage().timeouts().implicitlyWait(ConfigManager.getInstance().getWaitTime(), TimeUnit.SECONDS);
         return webDriverThreadLocal.get();
     }
 

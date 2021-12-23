@@ -1,5 +1,6 @@
 package rozetkaTest;
 
+import manager.ConfigManager;
 import manager.JacksonReader;
 import manager.PageFactoryManager;
 import manager.WebDriverSingleton;
@@ -23,14 +24,14 @@ public class RozetkaTest {
 
     @DataProvider(name = "xmlData", parallel = true)
     public static Object[][] dataProviderMethod1() {
-        List<ProductModel> products = JacksonReader.readListDataFromXml("src/main/resources/testData.xml");
+        List<ProductModel> products = JacksonReader.readListDataFromXml(ConfigManager.getInstance().getTestDataFilePath());
         return products.stream().map(productModel -> new Object[]{productModel.getItem(), productModel.getModel(), productModel.getPrice()}).toArray(Object[][]::new);
     }
 
     @BeforeMethod
     public void testSetUp() {
         pageFactoryManager = new PageFactoryManager();
-        WebDriverSingleton.getInstance().get("https://rozetka.com.ua/");
+        WebDriverSingleton.getInstance().get(ConfigManager.getInstance().getRozetkaUrl());
     }
 
     @Test(dataProvider = "xmlData")
@@ -47,7 +48,7 @@ public class RozetkaTest {
     public void tearDown() {
         File scrFile = ((TakesScreenshot) WebDriverSingleton.getInstance()).getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(scrFile, new File("src/main/resources/screenshot.png"));
+            FileUtils.copyFile(scrFile, new File(ConfigManager.getInstance().getScreenshotsFilePath()));
         } catch (IOException e) {
             e.printStackTrace();
         }
