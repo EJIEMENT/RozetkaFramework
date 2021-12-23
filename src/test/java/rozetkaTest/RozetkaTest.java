@@ -7,7 +7,10 @@ import model.ProductModel;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,19 +23,13 @@ public class RozetkaTest {
 
     @DataProvider(name = "xmlData", parallel = true)
     public static Object[][] dataProviderMethod1() {
-        List<ProductModel> users = JacksonReader.readListDataFromXml("src/main/resources/testData.xml");
-        Object[][] objects = new Object[users.size()][3];
-        for (int i = 0; i < users.size(); i++) {
-            objects[i][0] = users.get(i).getItem();
-            objects[i][1] = users.get(i).getModel();
-            objects[i][2] = users.get(i).getPrice();
-        }
-        return objects;
+        List<ProductModel> products = JacksonReader.readListDataFromXml("src/main/resources/testData.xml");
+        return products.stream().map(productModel -> new Object[]{productModel.getItem(), productModel.getModel(), productModel.getPrice()}).toArray(Object[][]::new);
     }
 
     @BeforeMethod
     public void testSetUp() {
-               pageFactoryManager = new PageFactoryManager();
+        pageFactoryManager = new PageFactoryManager();
         WebDriverSingleton.getInstance().get("https://rozetka.com.ua/");
     }
 
@@ -44,7 +41,6 @@ public class RozetkaTest {
         pageFactoryManager.getCatalogPage().clickOnFindProduct();
         pageFactoryManager.getProductPage().clickOnByButton();
         assertTrue(pageFactoryManager.getBucketPage().getItemPrice() < price);
-
     }
 
     @AfterMethod

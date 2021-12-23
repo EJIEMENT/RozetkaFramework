@@ -15,5 +15,15 @@
         <model>Bosch</model>>
         <price>999999</price>>
     </ProductModel>
+    <ProductModel>
+        <item>Клавіатура</item>>
+        <model>A4Tech</model>>
+        <price>5000</price>>
+    </ProductModel>
+    <ProductModel>
+        <item>Холодильник</item>>
+        <model>Samsung</model>>
+        <price>979320</price>>
+    </ProductModel>
 
 </Products>
