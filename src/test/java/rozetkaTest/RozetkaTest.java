@@ -36,12 +36,18 @@ public class RozetkaTest {
 
     @Test(dataProvider = "xmlData")
     public void checkProductPriceInBucket(String item, String model, Integer price) {
-        pageFactoryManager.geTHomePage().findItemByName(item);
-        pageFactoryManager.getComputersAndLaptops().inputItemModel(model);
-        pageFactoryManager.getComputersAndLaptops().selectFirstProduct(model);
-        pageFactoryManager.getCatalogPage().clickOnFindProduct();
-        pageFactoryManager.getProductPage().clickOnByButton();
-        assertTrue(pageFactoryManager.getBucketPage().getItemPrice() < price);
+        pageFactoryManager.geTHomePage()
+                .findItemByName(item);
+        pageFactoryManager.getComputersAndLaptops()
+                .inputItemModel(model);
+        pageFactoryManager.getComputersAndLaptops()
+                .selectFirstProduct(model);
+        pageFactoryManager.getCatalogPage()
+                .clickOnFindProduct();
+        pageFactoryManager.getProductPage()
+                .clickOnByButton();
+        assertTrue(pageFactoryManager.getBucketPage()
+                .getItemPrice() < price);
     }
 
     @AfterMethod

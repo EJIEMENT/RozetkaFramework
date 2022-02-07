@@ -22,7 +22,7 @@ public class ComputersAndLaptops extends BasePage {
     }
 
     public void selectFirstProduct(String itemModel) {
-        webDriver.findElement(By.xpath(String.format("//div[@data-filter-name = 'producer']//ul[@class = \"checkbox-filter\"]//label[contains (@for, \"%s\")]", itemModel))).click();
+        webDriver.findElement(By.xpath(String.format("//div[@data-filter-name = 'producer']//ul[@class = \"checkbox-filter\"]//a[@data-id =\"%s\"]", itemModel))).click();
     }
 
 }

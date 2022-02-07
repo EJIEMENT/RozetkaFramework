@@ -5,25 +5,25 @@
         <model>Apple</model>>
         <price>1000000</price>>
     </ProductModel>
-    <ProductModel>
-        <item>Bicycle</item>>
-        <model>USPCC</model>>
-        <price>750000</price>>
-    </ProductModel>
-    <ProductModel>
-        <item>Phone</item>>
-        <model>ASUS</model>>
-        <price>999999</price>>
-    </ProductModel>
-    <ProductModel>
-        <item>Keyboard</item>>
-        <model>A4Tech</model>>
-        <price>5000</price>>
-    </ProductModel>
-    <ProductModel>
-        <item>Watch</item>>
-        <model>STR</model>>
-        <price>979320</price>>
-    </ProductModel>
+<!--    <ProductModel>-->
+<!--        <item>Bicycle</item>>-->
+<!--        <model>USPCC</model>>-->
+<!--        <price>750000</price>>-->
+<!--    </ProductModel>-->
+<!--    <ProductModel>-->
+<!--        <item>Phone</item>>-->
+<!--        <model>ASUS</model>>-->
+<!--        <price>999999</price>>-->
+<!--    </ProductModel>-->
+<!--    <ProductModel>-->
+<!--        <item>Keyboard</item>>-->
+<!--        <model>A4Tech</model>>-->
+<!--        <price>5000</price>>-->
+<!--    </ProductModel>-->
+<!--    <ProductModel>-->
+<!--        <item>Watch</item>>-->
+<!--        <model>STR</model>>-->
+<!--        <price>979320</price>>-->
+<!--    </ProductModel>-->
 
 </Products>
