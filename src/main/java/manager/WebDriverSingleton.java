@@ -6,6 +6,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.concurrent.TimeUnit;
 
+import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
+
 public class WebDriverSingleton {
     private static ThreadLocal<WebDriver> webDriverThreadLocal = new ThreadLocal<>();
 
@@ -20,9 +22,9 @@ public class WebDriverSingleton {
     }
 
     private static WebDriver createChromeDriver() {
-        System.setProperty(ConfigManager.getInstance().getDriverName(), ConfigManager.getInstance().getDriverPath());
+        chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("-incognito","--disable-popup-blocking");
+        options.addArguments("-incognito", "--disable-popup-blocking");
         webDriverThreadLocal.set(new ChromeDriver(options));
         webDriverThreadLocal.get().manage().window().maximize();
         webDriverThreadLocal.get().manage().timeouts().implicitlyWait(ConfigManager.getInstance().getWaitTime(), TimeUnit.SECONDS);
