@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="SmokeSuite" parallel="tests" thread-count="1" data-provider-thread-count="3">
+    <test name="SmokeSuite" parallel="methods" thread-count="1">
+        <classes>
+            <class name="rozetkaTest.RozetkaTest">
+                <methods>
+                    <include name="checkProductPriceInBucket"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
