@@ -2,7 +2,7 @@
 
 <suite name="SmokeSuite" parallel="tests" thread-count="1" data-provider-thread-count="3">
     <listeners>
-        <listener class-name="TestListener"/>
+        <listener class-name="listener.TestListener"/>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
     </listeners>
