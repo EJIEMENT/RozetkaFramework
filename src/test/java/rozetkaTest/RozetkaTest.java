@@ -49,6 +49,10 @@ public class RozetkaTest {
         assertTrue(pageFactoryManager.getBucketPage()
                 .getItemPrice() < price);
     }
+    @Test
+    public void negativeTest(){
+        assertTrue(false);
+    }
 
     @AfterMethod
     public void tearDown() {

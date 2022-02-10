@@ -11,6 +11,7 @@
             <class name="rozetkaTest.RozetkaTest">
                 <methods>
                     <include name="checkProductPriceInBucket"/>
+                    <include name="negativeTest"/>
                 </methods>
             </class>
         </classes>

@@ -15,11 +15,11 @@
 <!--        <model>ASUS</model>>-->
 <!--        <price>999999</price>>-->
 <!--    </ProductModel>-->
-<!--    <ProductModel>-->
-<!--        <item>Keyboard</item>>-->
-<!--        <model>A4Tech</model>>-->
-<!--        <price>5000</price>>-->
-<!--    </ProductModel>-->
+    <ProductModel>
+        <item>Keyboard</item>>
+        <model>A4Tech</model>>
+        <price>5000</price>>
+    </ProductModel>
 <!--    <ProductModel>-->
 <!--        <item>Watch</item>>-->
 <!--        <model>STR</model>>-->
